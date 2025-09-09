@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- CONFIGURAÇÃO --- 
     // ADICIONE OS NOMES DOS SEUS ARQUIVOS DE ÁUDIO AQUI DENTRO DESTA LISTA:
     const availableSounds = [
-        'ah_ta_joia.mp3', 'lapada.mp3', 'ricardo_aubadala.mp3',
+        'ah_ta_joia.mp3', 'lapada.mp3', 'ricardo_aubadala.mp3', 'brazino.mp3',
         // Exemplo: 'meu-som.mp3',
     ];
 
