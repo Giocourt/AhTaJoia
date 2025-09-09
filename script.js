@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- CONFIGURAÇÃO --- 
     // ADICIONE OS NOMES DOS SEUS ARQUIVOS DE ÁUDIO AQUI DENTRO DESTA LISTA:
     const availableSounds = [
-        'ah_ta_joia.mp3',
+        'ah_ta_joia.mp3', 'lapada.mp3', 'ricardo_aubadala.mp3',
         // Exemplo: 'meu-som.mp3',
     ];
 
@@ -72,20 +72,32 @@ document.addEventListener('DOMContentLoaded', () => {
             soundboardContainer.appendChild(pad);
 
             pad.addEventListener('click', () => {
-                if (!soundConfig[i]) return;
+                if (!soundConfig[i]) return; // Não faz nada se o pad estiver vazio
 
                 const currentAudio = document.getElementById(`audio-${i}`);
-                if (!currentAudio.paused) {
+
+                if (currentAudio.paused) {
+                    // Se estiver parado, toca do início.
                     currentAudio.currentTime = 0;
+                    const playPromise = currentAudio.play();
+                    if (playPromise !== undefined) {
+                        playPromise.then(() => {
+                            pad.classList.add('playing');
+                        }).catch(() => {
+                            pad.classList.remove('playing');
+                        });
+                    }
+                } else {
+                    // Se estiver tocando, para e reseta.
+                    currentAudio.pause();
+                    currentAudio.currentTime = 0;
+                    pad.classList.remove('playing');
                 }
-                pad.classList.add('playing');
-                const playPromise = currentAudio.play();
-                if (playPromise !== undefined) {
-                    playPromise.catch(() => pad.classList.remove('playing'))
-                               .then(() => {
-                                    currentAudio.addEventListener('ended', () => pad.classList.remove('playing'), { once: true });
-                               });
-                }
+
+                // Evento para garantir que a classe 'playing' seja removida se o som terminar sozinho
+                currentAudio.addEventListener('ended', () => {
+                    pad.classList.remove('playing');
+                }, { once: true });
             });
         }
     };
