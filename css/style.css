@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+:root {
+    --bg-color: #e0e5ec;
+    --text-color: #5f677A;
+    --accent-color: #007bff;
+    --shadow-light: rgba(255, 255, 255, 0.8);
+    --shadow-dark: rgba(0, 0, 0, 0.15);
+    --danger-color: #d73a49;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding-bottom: 30px;
+}
+
+header {
+    width: 100%;
+    padding: 25px 0;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: var(--text-color);
+    text-shadow: 1px 1px 2px var(--shadow-light), -1px -1px 2px var(--shadow-dark);
+}
+
+#soundboard-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    max-width: 500px;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.sound-pad {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    background-color: var(--bg-color);
+    border-radius: 25px;
+    box-shadow: -8px -8px 16px var(--shadow-light), 8px 8px 16px var(--shadow-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.sound-pad:hover {
+    box-shadow: -4px -4px 12px var(--shadow-light), 4px 4px 12px var(--shadow-dark);
+}
+
+.sound-pad:active, .sound-pad.playing {
+    box-shadow: inset -6px -6px 12px var(--shadow-light), inset 6px 6px 12px var(--shadow-dark);
+}
+
+.sound-pad.playing .pad-name,
+.sound-pad.playing .icon-btn i {
+    color: var(--accent-color);
+    transform: scale(0.95);
+}
+
+.pad-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.icon-btn {
+    position: absolute;
+    font-size: 1rem;
+    color: var(--text-color);
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-btn:hover {
+    background-color: var(--bg-color);
+    box-shadow: inset -2px -2px 5px var(--shadow-light), inset 2px 2px 5px var(--shadow-dark);
+}
+
+.settings-btn {
+    top: 10px;
+    right: 10px;
+}
+
+.remove-btn {
+    top: 10px;
+    left: 10px;
+}
+
+.remove-btn:hover i {
+    color: var(--danger-color);
+}
+
+
+
+/* Modal Styles */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+    background-color: var(--bg-color);
+    margin: 15% auto; 
+    padding: 25px;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 15px;
+    box-shadow: -8px -8px 16px var(--shadow-light), 8px 8px 16px var(--shadow-dark);
+}
+
+.modal-header {
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.modal-header h2 {
+    font-size: 1.8rem;
+    color: var(--text-color);
+}
+
+.close-btn {
+    color: var(--text-color);
+    float: right;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: var(--danger-color);
+}
+
+#sound-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.sound-option {
+    padding: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    font-weight: 600;
+    box-shadow: -4px -4px 8px var(--shadow-light), 4px 4px 8px var(--shadow-dark);
+}
+
+.sound-option:hover {
+    box-shadow: inset -4px -4px 8px var(--shadow-light), inset 4px 4px 8px var(--shadow-dark);
+}
+
+.sound-option:active {
+     box-shadow: inset -6px -6px 12px var(--shadow-light), inset 6px 6px 12px var(--shadow-dark);
+}
